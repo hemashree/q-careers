@@ -6,21 +6,17 @@ FactoryGirl.define do
   factory :candidate do
     name
     email
-    phone "910 121 4242"
+    phone "910-121-4242"
     current_city "Mysore"
-    native_city "Davangere"
-    skills "C, C++, Java, HTML5, CSS3"
+    current_state "Karnataka"
+    current_country "India"
+    native_city "Mandya"
+    native_state "Karnataka"
+    native_country "India"
+    year_of_passing "2014"
+    experience_in_years "2"
+    skills "C, C++, Java, HTML5, CSS3, Ruby, Rails"
     resume { Rack::Test::UploadedFile.new('test/fixtures/test.pdf', 'test.pdf') }
-  end
-
-  factory :fresher, parent: :candidate do
-    type "Fresher"
-    year_of_passing { Fresher::YEAR_OF_PASSING_LIST.sample }
-  end
-
-  factory :experienced, parent: :candidate do
-    type "Experienced"
-    experience_in_years { Experienced::YEARS_LIST.sample }
   end
 
 end
