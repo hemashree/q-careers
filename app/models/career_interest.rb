@@ -58,10 +58,17 @@ class CareerInterest < ActiveRecord::Base
     self.save
   end
 
-  private
+  def self.to_csv(career_interests, options = {})
+    CSV.generate(options) do |csv|
+      csv << Candidate.column_names
+      career_interests.each do |career_interest|
+        csv << career_interest.candidate.attributes.values_at(*Candidate.column_names)
+      end
+    end
+  end
 
+  private
   def check_source_and_referrer
     self.source = :employee_referral if referrer.present?
   end
-
 end
