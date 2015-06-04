@@ -12,10 +12,11 @@ class Candidate < ActiveRecord::Base
 
   validate_string :name, mandatory: true
   validate_email :email, uniqueness: true
-  validate_string :phone, mandatory: true, min_length: 10, max_length: 10, format: /\A[0-9\ \-\+]{6,12}\z/, uniqueness: true
+  validate_string :phone, mandatory: true, min_length: 12, max_length: 12, format: /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/, uniqueness: true
 
   validate_string :current_city, mandatory: true, max_length: 128, format: /.*/i
   validate_string :native_city, mandatory: true, max_length: 128, format: /.*/i
+  # validate_string :year_of_passing, inclusion: %w("2009" "2010" "2011" "2012" "2013" "2014" "2015")
   # validates :resume, presence: true
 
   # File Uploader Method Hook
@@ -33,9 +34,9 @@ class Candidate < ActiveRecord::Base
 
   # * Return the first letters of first name and last name
   # == Examples
-  #   >>> fresher = Fresher.new(name: "Ravi Shankar")
-  #   >>> fresher.namify
-  #   => "RS"
+  #   >>> candidate = Candidate.new(name: "Anjan Gowda")
+  #   >>> candidate.namify
+  #   => "AG"
   def namify
     self.name.split(" ").map{|x| x.first.capitalize}[0..1].join("")
   end
