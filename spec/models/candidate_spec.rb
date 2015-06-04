@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe Candidate, :type => :model do
 
   let(:candidate) {FactoryGirl.create(:candidate)}
@@ -31,16 +30,11 @@ RSpec.describe Candidate, :type => :model do
     it { should_not allow_value('ED').for(:email )}
     it { should_not allow_value("x"*257+"@domain.com").for(:email )}
 
-    # FIXME - The phone validation should be in place
-    # Put a regular expression to allow the following formats
-    # A Combination of any numbers, spaces, hyphes(-) and min length of 6 and max length of 12 excluding spaces
     it { should validate_presence_of :phone }
     it { should allow_value('988-012-3123').for(:phone )}
     it { should_not allow_value('12343').for(:phone )}
     it { should_not allow_value('1234 1234 1234 1234').for(:phone )}
 
-    # FIXME - Check minimum length (poodle validation sets it as 3)
-    # And Maximum as 128
     it { should validate_presence_of :current_city }
     it { should allow_value('Mysore').for(:current_city )}
     it { should allow_value('New-Delhi').for(:current_city )}
@@ -48,15 +42,12 @@ RSpec.describe Candidate, :type => :model do
     it { should_not allow_value('CC').for(:current_city )}
     it { should_not allow_value("x"*129).for(:current_city )}
 
-    # FIXME - Check minimum length (poodle validation sets it as 3)
-    # And Maximum as 128
     it { should validate_presence_of :native_city }
     it { should allow_value('Mysore').for(:native_city )}
     it { should allow_value('New-Delhi').for(:native_city )}
     it { should allow_value('New Delhi').for(:native_city )}
     it { should_not allow_value('CC').for(:native_city )}
     it { should_not allow_value("x"*129).for(:native_city )}
-
   end
 
   context "Class Methods" do
@@ -94,5 +85,4 @@ RSpec.describe Candidate, :type => :model do
       expect(FactoryGirl.build(:candidate, native_city: nil, native_state: nil, native_country: "India").display_native_address).to eq("India")
     end
   end
-
 end

@@ -1,10 +1,7 @@
 FactoryGirl.define do
-
-  sequence(:name) {|n| "candidate#{n}" }
   sequence(:email) {|n| "candidate.#{n}@domain.com" }
-
   factory :candidate do
-    name
+    name "Anjan Kumar"
     email
     phone "910-121-4242"
     current_city "Mysore"
@@ -18,5 +15,4 @@ FactoryGirl.define do
     skills "C, C++, Java, HTML5, CSS3, Ruby, Rails"
     resume { Rack::Test::UploadedFile.new('test/fixtures/test.pdf', 'test.pdf') }
   end
-
 end
