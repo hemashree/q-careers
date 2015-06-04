@@ -59,6 +59,8 @@
     <%= theme_edit_button(main_app.edit_admin_event_path(@event)) %>
     <%= theme_delete_button(main_app.admin_event_path(@event)) %>
 
+   <div class="cl-20"></div>
+    <%= link_to "Export candidates CSV", admin_export_candidate_path(@event.id, format: "csv"), :class =>"btn btn-success btn-xs" %> 
   </div>
 </div>
 

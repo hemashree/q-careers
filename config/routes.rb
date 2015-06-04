@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :events
     resources :configurations
     resources :candidates
+    get 'export_candidate/:id' => "career_interests#export_candidate", as: :export_candidate
   end
 
   namespace :recruiter do
