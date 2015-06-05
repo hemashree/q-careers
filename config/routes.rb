@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       member do
         post :apply
       end
-      resources :career_interests, only: [:show] do
+      resources :career_interests, only: [:show, :edit, :update] do
         member do
           get :confirm
         end

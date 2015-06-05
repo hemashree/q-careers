@@ -1,8 +1,8 @@
 function validateReferralForm() {
 
-  jQuery.validator.addMethod("phone_format", function(value, element) {
-    return /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/.test( value );
-  });
+    jQuery.validator.addMethod("phone_format", function(value, element) {
+      return /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/.test( value );
+    });
 
     $('#form_referral').validate({
       debug: true,
