@@ -23,10 +23,15 @@ class Volunteer::RegistrationsController < Poodle::AdminController
     # FIXME - Params are passed now some odd way.
     @candidate.year_of_passing = params[:candidate][:candidate][:registration][:year_of_passing]
     @registration = CareerInterest.new(event: @event, candidate: @candidate)
-    @candidate.save && @registration.save
-    begin
-      RegistrationsMailer.registration_desk(@registration).deliver_now
-    rescue
+    if @candidate.save && @registration.save
+      begin
+        RegistrationsMailer.registration_desk(@registration).deliver_now
+        rescue
+      end
+      flash[:success] = "Successfully Registered!"
+    else
+      flash[:error] = "Registration failed!"
+      render "new"
     end
   end
 
@@ -93,7 +98,7 @@ class Volunteer::RegistrationsController < Poodle::AdminController
   end
 
   def candidate_params
-    params[:candidate].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing )
+    params[:candidate].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing, :resume )
   end
 
   def default_collection_name

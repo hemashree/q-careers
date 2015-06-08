@@ -20,7 +20,7 @@
 
         <%= theme_form_field(@candidate, :name) %>
         <%= theme_form_field(@candidate, :email) %>
-        <%= theme_form_field(@candidate, :phone) %>
+        <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
         <%= theme_form_field(@candidate, :current_city) %>
         <%= theme_form_field(@candidate, :native_city) %>
 
@@ -28,8 +28,7 @@
           <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
           <%= theme_form_select_group(c, @candidate, :year_of_passing, options_list, label: "Year of Passing *", param_name: "referral[year_of_passing]", prompt: true) %>
         <% end %>
-
-        <%= theme_form_field(@candidate, :resume, html_options: {type: 'file'}) %>
+        <%= theme_form_field(@candidate, :resume, :required => (@candidate.new_record? ? true : false), html_options: {type: 'file'}) %>
 
       </div>
 

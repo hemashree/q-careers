@@ -1,5 +1,9 @@
 function validateApplicationForm() {
 
+    jQuery.validator.addMethod("phone_format", function(value, element) {
+    return /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/.test( value );
+    });
+
     $('#form_application').validate({
       debug: true,
       rules: {
@@ -11,8 +15,9 @@ function validateApplicationForm() {
         "fresher[email]": "required",
         "fresher[phone]": {
             required: true,
-            minlength: 10,
-            maxlength: 10
+            minlength: 12,
+            maxlength: 12,
+            phone_format: true
         },
         "fresher[current_city]": "required",
         "fresher[native_city]": "required",
@@ -26,8 +31,9 @@ function validateApplicationForm() {
         "fresher[email]": "This field is required.",
         "fresher[phone]": {
           required: "This field is required.",
-          minlength: "10 digits required (mobile phone preferred)",
-          maxlength: "10 digits required (mobile phone preferred)"
+          minlength: "12 characters required including '-' (333-333-4444)",
+          maxlength: "12 characters required including '-' (333-333-4444)",
+          phone_format: "The phone number should be in the format of 333-333-4444."
         },
         "fresher[current_city]": "This field is required.",
         "fresher[native_city]": "This field is required.",

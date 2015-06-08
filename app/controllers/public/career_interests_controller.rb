@@ -12,6 +12,26 @@ class Public::CareerInterestsController < Public::BaseController
     save_resource(@career_interest)
   end
 
+   def edit
+    @registration = CareerInterest.find_by_id(params[:id])
+    @candidate = @registration.candidate
+  end
+
+  def update
+    @registration = CareerInterest.find_by_id(params[:id])
+    @candidate = @registration.candidate
+
+    @candidate.resume = params[:candidate][:resume]
+
+    if @candidate.save && @registration.save
+      flash[:success] = "Resume has been uploaded successfully!"
+      redirect_to root_path
+    else
+      flash[:error] = "Failed to upload your resume!"
+      render "edit"
+    end
+  end
+
   def confirm
     unless @career_interest.confirm!
       flash[:error] = "Unknown error while confirming"
@@ -32,4 +52,3 @@ class Public::CareerInterestsController < Public::BaseController
   end
 
 end
-

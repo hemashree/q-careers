@@ -1,5 +1,9 @@
 function validateRegistrationForm() {
 
+    jQuery.validator.addMethod("phone_format", function(value, element) {
+    return /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/.test( value );
+    });
+
     $('#form_registration').validate({
       debug: true,
       rules: {
@@ -11,8 +15,9 @@ function validateRegistrationForm() {
         "candidate[email]": "required",
         "candidate[phone]": {
             required: true,
-            minlength: 10,
-            maxlength: 10
+            minlength: 12,
+            maxlength: 12,
+            phone_format: true
         },
         "candidate[current_city]": "required",
         "candidate[native_city]": "required",
@@ -37,8 +42,9 @@ function validateRegistrationForm() {
         "candidate[email]": "This field is required.",
         "candidate[phone]": {
           required: "This field is required.",
-          minlength: "10 digits required (mobile phone preferred)",
-          maxlength: "10 digits required (mobile phone preferred)"
+          minlength: "12 characters required including '-' (333-333-4444)",
+          maxlength: "12 characters required including '-' (333-333-4444)",
+          phone_format: "The phone number should be in the format of 333-333-4444."
         },
         "candidate[current_city]": "This field is required.",
         "candidate[native_city]": "This field is required.",
