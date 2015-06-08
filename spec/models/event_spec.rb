@@ -54,18 +54,18 @@ RSpec.describe Event, type: :model do
 
   context "Instance Methods" do
     it "it should display status" do
-      event1 = FactoryGirl.create(:event, :name => "Event7", :slug => "up4", status: "scheduled")
-      event2 = FactoryGirl.create(:event, :name => "Event8", :slug => "up5", status: "planning")
-      event3 = FactoryGirl.create(:event, :name => "Event9", :slug => "up6", status: "over")
+      event1 = FactoryGirl.build(:event, :name => "Event7", :slug => "up4", status: "scheduled")
+      event2 = FactoryGirl.build(:event, :name => "Event8", :slug => "up5", status: "planning")
+      event3 = FactoryGirl.build(:event, :name => "Event9", :slug => "up6", status: "over")
       expect(event1.display_status).to eq("Scheduled")
       expect(event2.display_status).to eq("Planning")
       expect(event3.display_status).to eq("Over")
     end
 
     it "it should test the event is over or planning or it is scheduled" do
-      event1 = FactoryGirl.create(:event, :name => "Event10", :slug => "up7", status: "scheduled")
-      event2 = FactoryGirl.create(:event, :name => "Event11", :slug => "up8", status: "planning")
-      event3 = FactoryGirl.create(:event, :name => "Event12", :slug => "up9", status: "over")
+      event1 = FactoryGirl.build(:event, :name => "Event10", :slug => "up7", status: "scheduled")
+      event2 = FactoryGirl.build(:event, :name => "Event11", :slug => "up8", status: "planning")
+      event3 = FactoryGirl.build(:event, :name => "Event12", :slug => "up9", status: "over")
       array = [event1, event2, event3]
       expect(event3.over?).to eq(event3.status == "over")
       expect(event1.scheduled?).to eq(event1.status == "scheduled")

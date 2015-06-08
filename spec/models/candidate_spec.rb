@@ -72,17 +72,15 @@ RSpec.describe Candidate, :type => :model do
     end
 
     it "display_current_address" do
-      expect(FactoryGirl.build(:candidate, current_city: "Mysore", current_state: "Karnataka", current_country: "India").display_current_address).to eq("Mysore, Karnataka, India")
-      expect(FactoryGirl.build(:candidate, current_city: "Mysore", current_state: nil, current_country: "India").display_current_address).to eq("Mysore, India")
-      expect(FactoryGirl.build(:candidate, current_city: nil, current_state: "Karnataka", current_country: "India").display_current_address).to eq("Karnataka, India")
-      expect(FactoryGirl.build(:candidate, current_city: nil, current_state: nil, current_country: "India").display_current_address).to eq("India")
+      expect(FactoryGirl.build(:candidate, current_city: "Mysore", current_state: "Karnataka").display_current_address).to eq("Mysore, Karnataka")
+      expect(FactoryGirl.build(:candidate, current_city: "Mysore", current_state: nil).display_current_address).to eq("Mysore")
+      expect(FactoryGirl.build(:candidate, current_city: nil, current_state: "Karnataka").display_current_address).to eq("Karnataka")
     end
 
     it "display_native_address" do
-      expect(FactoryGirl.build(:candidate, native_city: "Mysore", native_state: "Karnataka", native_country: "India").display_native_address).to eq("Mysore, Karnataka, India")
-      expect(FactoryGirl.build(:candidate, native_city: "Mysore", native_state: nil, native_country: "India").display_native_address).to eq("Mysore, India")
-      expect(FactoryGirl.build(:candidate, native_city: nil, native_state: "Karnataka", native_country: "India").display_native_address).to eq("Karnataka, India")
-      expect(FactoryGirl.build(:candidate, native_city: nil, native_state: nil, native_country: "India").display_native_address).to eq("India")
+      expect(FactoryGirl.build(:candidate, native_city: "Mysore", native_state: "Karnataka").display_native_address).to eq("Mysore, Karnataka")
+      expect(FactoryGirl.build(:candidate, native_city: "Mysore", native_state: nil).display_native_address).to eq("Mysore")
+      expect(FactoryGirl.build(:candidate, native_city: nil, native_state: "Karnataka").display_native_address).to eq("Karnataka")
     end
   end
 end

@@ -46,7 +46,7 @@ class Candidate < ActiveRecord::Base
   #   >>> candidate.display_address(type)
   #   => "Mysore, Karnataka, India"
   def display_address(type)
-    [self.send("#{type}_city"), self.send("#{type}_state"), self.send("#{type}_country")].compact.uniq.join(", ")
+    [self.send("#{type}_city"), self.send("#{type}_state")].compact.uniq.join(", ")
     #address_list << send.("#{type}_city") unless send.("#{type}_city").blank?
     #address_list << send.("#{type}_state") unless send.("#{type}_state").blank?
     #address_list << send.("#{type}_country") unless send.("#{type}_country").blank?
