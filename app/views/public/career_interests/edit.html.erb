@@ -1,0 +1,28 @@
+<% method = @candidate.new_record? ? :post : :put %>
+<% path = @candidate.new_record? ? main_app.public_event_career_interest_path(@event) : main_app.public_event_career_interest_path(@event, @registration) %>
+
+<%= form_for(@candidate, url: path, :html => {:id=>"form_registration_upload_cv", :class=>"mb-0 form-horizontal", :role => "form", :method => method, multipart: true}) do |f| %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Hi <%= @candidate.name.titleize %>, Please upload your resume to complete your profile.
+  </div>
+  <div class="panel-body" style="height:auto;">
+
+    <div id="registration_form_error">
+      <%= @candidate.errors[:base].to_sentence %>
+    </div>
+
+    <div class="form-inputs mb-30 mt-30">
+      <%= theme_form_field(@candidate, :resume, html_options: {type: 'file'}) %>
+    </div>
+
+  </div>
+
+  <div class="panel-footer clearfix">
+    <div class="pull-right">
+      <%= theme_form_button(@registration, "Submit the Form") %>
+    </div>
+  </div>
+</div>
+<% end %>

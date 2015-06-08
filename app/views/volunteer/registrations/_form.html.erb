@@ -28,7 +28,7 @@
 
         <%= theme_form_field(@candidate, :name) %>
         <%= theme_form_field(@candidate, :email) %>
-        <%= theme_form_field(@candidate, :phone) %>
+        <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
         <%= theme_form_field(@candidate, :current_city) %>
         <%= theme_form_field(@candidate, :native_city) %>
 

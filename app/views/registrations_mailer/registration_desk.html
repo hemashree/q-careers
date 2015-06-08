@@ -10,7 +10,7 @@
 			<br>
 			Your Profile is Incomplete. Please upload your resume to complete your Profile.
 			<br>
-			<a href="http://google.com">Click here to upload your resume</a>
+			<%= link_to 'Click here to upload your resume', edit_public_event_career_interest_url(:event_id => @careers_interest.event.id, :id =>@careers_interest.id ) %>
 		</p>
 
 		<p>
