@@ -39,7 +39,7 @@ class Admin::ConfigurationsController < Poodle::AdminController
   end
 
   def permitted_params
-    params[:qcareer_configuration].permit(:name, :value)
+    params[:qcareer_configuration].permit(:name, :value, :description)
   end
 
   def set_navs

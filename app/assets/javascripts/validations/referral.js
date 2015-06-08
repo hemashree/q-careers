@@ -11,8 +11,8 @@ function validateReferralForm() {
         "candidate[email]": "required",
         "candidate[phone]": {
             required: true,
-            minlength: 10,
-            maxlength: 10
+            minlength: 15,
+            maxlength: 15
         },
         "candidate[current_city]": "required",
         "candidate[native_city]": "required",
