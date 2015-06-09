@@ -22,3 +22,13 @@ test:
   password: <password>
   host: localhost
   port: 5432
+
+qa:
+  adapter: postgresql
+  encoding: unicode
+  reconnect: false
+  database: q_careers_qa
+  pool: 5
+  username: q_careers_qa_user
+  host: localhost
+  port: 5432
