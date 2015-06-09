@@ -2,6 +2,7 @@ class QcareerConfiguration < ActiveRecord::Base
 
   validates :value, presence: true
   validates :description, presence: true
+  validates :name, presence: true
 
 	def self.homepage_event
 		event = nil

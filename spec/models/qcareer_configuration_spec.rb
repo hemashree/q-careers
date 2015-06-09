@@ -6,15 +6,12 @@ describe "validate fields" do
   before :each do
     @career_configuration = QcareerConfiguration.new(
             :value => 'Value',
-            :description => 'Desc'
+            :description => 'Desc',
+            :name => 'Dashboard'
         )
   end
   
   it "should validate the career configuation fields" do
-   @career_configuration = QcareerConfiguration.new(
-          :value => 'Value',
-          :description => 'Desc'
-      )
     expect(@career_configuration).to be_valid
   end
 
@@ -23,6 +20,11 @@ describe "validate fields" do
     expect(@career_configuration).not_to be_valid
     
     @career_configuration.description = nil
+    expect(@career_configuration).not_to be_valid
+  end
+
+  it "should not validate if the name is nill" do
+    @career_configuration.name = nil
     expect(@career_configuration).not_to be_valid
   end
 end
