@@ -3,6 +3,7 @@
   <div class="media-body">
     <%= theme_item_title(configuration.name, main_app.admin_configuration_path(configuration)) %>
     <%= theme_item_sub_title(configuration.value) if configuration.value %>
+    <%= theme_item_sub_title(configuration.description) if configuration.description %>
   </div>
 </div>
 

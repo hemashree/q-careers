@@ -5,6 +5,7 @@
     <div class="ml-10">
       <%= theme_panel_heading(@configuration.name) %>
       <%= theme_panel_description(@configuration.value) %>
+      <%= theme_panel_description(@configuration.description) %>
     </div>
 
     <%= theme_edit_button(main_app.edit_admin_configuration_path(@configuration)) %>

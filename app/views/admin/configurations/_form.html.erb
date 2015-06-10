@@ -14,8 +14,10 @@
       </div>
 
       <div class="form-inputs mb-30 mt-30">
-        <%= theme_form_field(@configuration, :name) %>
+        <%= theme_panel_heading(@configuration.name) %>
+      </br>
         <%= theme_form_field(@configuration, :value) %>
+        <%= theme_form_field(@configuration, :description, html_options: {type: 'textarea'}) %>
       </div>
 
     </div>
