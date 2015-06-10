@@ -1,0 +1,9 @@
+<%= clear_tag(10) %>
+<% @event.career_interests.limit(3).each do |career_interest| %>
+  <div id="div_career_interest_<%= career_interest.id %>">
+    <%= render :partial=>"admin/events/career_interests/item", :locals=>{:career_interest=>career_interest} %>
+  </div>
+<% end %>
+
+<%= link_to "View All Interests", main_app.recruiter_event_career_interests_path(@event), class: "btn btn-default btn-xs pull-right" %>
+<%= clear_tag(5) %>

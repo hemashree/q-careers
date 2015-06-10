@@ -1,0 +1,16 @@
+<% fresher = career_interest.candidate %>
+<a class="media-left" href="#">
+  <%= display_image(fresher, "logo.image.url",
+                      width: "60px",
+                      place_holder: {
+                        width: 80,
+                        height: 90,
+                        text: fresher.namify}
+                      ) %>
+</a>
+<div class="media-body">
+  <%= theme_item_title(fresher.name, "#") %>
+  <%= theme_item_sub_title("#{fresher.year_of_passing} Graduate") %>
+  <%= theme_item_description("#{fresher.current_city} (#{fresher.native_city})") %>
+</div>
+<%= clear_tag(20) %>

@@ -1,0 +1,19 @@
+<% if @referral.errors.blank? && @candidate.errors.blank? %>
+	// Fill the right box with first referral details
+	$('#div_referral_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
+
+	// Add the newly created item to the list
+  <% item_link = employee_event_referral_path(@event, @referral) %>
+  $("#div_referral_index").prepend("<div id=\"div_referral_<%= @referral.id %>\"><%= escape_javascript(render(:partial => 'common/candidate/item', :locals => { candidate: @candidate, career_interest: @referral, item_link: item_link })) %></div>")
+  $(".panel-message").hide();
+<% else %>
+  $('#div_referral_details').html("<%= escape_javascript(render(:partial=>'form')) %>");
+  validateReferralForm();
+
+  // Populate Server Side Errors
+  <%
+    text = "You have few errors. They have been highlighted."
+    error_message = content_tag(:div, text, class: "alert alert-danger")
+  %>
+  $("#referral_form_error").html("<%= escape_javascript(error_message) %>");
+<% end %>

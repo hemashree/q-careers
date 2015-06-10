@@ -32,6 +32,10 @@
       <%= link_to raw("<i class=\"fa fa-globe\"></i> My Referrals"), main_app.employee_events_path %>
     <% end %>
 
+    <% my_referrals_link = content_tag :li, class: nav_class("employee/my_referrals") do %>
+      <%= link_to raw("<i class=\"fa fa-globe\"></i> My Referral"), main_app.employee_my_referrals_path %>
+    <% end %>
+
     <% configurations_link = content_tag :li, class: nav_class("admin/configurations") do %>
       <%= link_to raw("<i class=\"fa fa-globe\"></i> Configurations"), main_app.admin_configurations_path %>
     <% end %>
@@ -46,6 +50,7 @@
       <%= careern_interests_link %>
       <%= registrations_link %>
       <%= referrals_link %>
+      <%= my_referrals_link %>
       <%= configurations_link %>
     <% when "recruiter" %>
       <li class="heading">Recruiter</li>
@@ -53,15 +58,18 @@
       <%= careern_interests_link %>
       <%= registrations_link %>
       <%= referrals_link %>
+      <%= my_referrals_link %>
     <% when "volunteer" %>
       <li class="heading">Volunteer</li>
       <%= dashboard_link %>
       <%= registrations_link %>
       <%= referrals_link %>
+      <%= my_referrals_link %>
     <% else %>
       <li class="heading">Employee</li>
       <%= dashboard_link %>
       <%= referrals_link %>
+      <%= my_referrals_link %>
     <% end %>
 
     <li class="heading">Reports</li>
