@@ -87,6 +87,7 @@ group :test do
   #gem 'pickle'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :development, :test do
