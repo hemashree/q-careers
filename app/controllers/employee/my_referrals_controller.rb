@@ -3,12 +3,12 @@ class Employee::MyReferralsController < Poodle::AdminController
   skip_before_filter :require_admin
 
   def new
-    @my_referral = MyReferral.new
+    @my_referral = Candidate.new
     super
   end
 
   def create
-    @my_referral = MyReferral.new(permitted_params)
+    @my_referral = Candidate.new(permitted_params)
 
     if @my_referral.save
       flash[:success] = "Successfully saved the data."
@@ -21,11 +21,11 @@ class Employee::MyReferralsController < Poodle::AdminController
   end
 
   def edit
-    @my_referral = MyReferral.find_by_id(params[:id])
+    @my_referral = Candidate.find_by_id(params[:id])
   end
 
   def update
-    @my_referral = MyReferral.find_by_id(params[:id])
+    @my_referral = Candidate.find_by_id(params[:id])
     @my_referral.assign_attributes(permitted_params)
 
     if @my_referral.save && @referral.save
@@ -36,7 +36,7 @@ class Employee::MyReferralsController < Poodle::AdminController
   end
 
   def download
-    @my_referral = MyReferral.find_by_id(params[:id])
+    @my_referral = Candidate.find_by_id(params[:id])
     if ["production", "staging"].include?(Rails.env)
       redirect_to @my_referral.candidate.resume.url
     else
@@ -47,7 +47,7 @@ class Employee::MyReferralsController < Poodle::AdminController
   private
 
   def permitted_params
-    params[:my_referral].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing, :resume, :experience, :course, :subject, :institution, :native_state, :current_state, :cummunication_address, :skills, :job, :event, :applicant_relation)
+    params[:candidate].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing, :resume )
   end
 
   def default_collection_name
@@ -59,7 +59,7 @@ class Employee::MyReferralsController < Poodle::AdminController
   end
 
   def default_class
-    MyReferral
+    Candidate
   end
 
   def set_navs

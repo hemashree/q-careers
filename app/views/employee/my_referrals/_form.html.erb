@@ -22,20 +22,14 @@
         <%= theme_form_field(@my_referral, :phone, html_options: {placeholder: '333-333-4444'}) %>
         <%= theme_form_field(@my_referral, :current_city) %>
         <%= theme_form_field(@my_referral, :native_city) %>
-        <%= theme_form_field(@my_referral, :course) %>
-        <%= theme_form_field(@my_referral, :subject) %>
-        <%= theme_form_field(@my_referral, :institution) %>
+       
 
         <%= f.fields_for :my_referral do |c| %>
-          <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
-          <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "referral[year_of_passing]", prompt: true) %>
+        <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
+          <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
         <% end %>
-        <%= theme_form_field(@my_referral, :resume, :required => (@my_referral.new_record? ? true : false), html_options: {type: 'file'}) %>
-        <%= theme_form_field(@my_referral, :skills) %>
-        <%= theme_form_field(@my_referral, :job) %>
-        <%= theme_form_field(@my_referral, :event) %>
-        <%= theme_form_field(@my_referral, :applicant_relation) %>
 
+        <%= theme_form_field(@my_referral, :resume, :required => (@my_referral.new_record? ? true : false), html_options: {type: 'file'}) %>
       </div>
 
     </div>
