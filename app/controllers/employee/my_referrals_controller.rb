@@ -47,7 +47,7 @@ class Employee::MyReferralsController < Poodle::AdminController
   private
 
   def permitted_params
-    params[:candidate].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing, :resume,:candidate_type)
+    params[:candidate].permit(:name, :email, :phone, :current_city, :native_city, :year_of_passing, :resume,:candidate_type,:course,:subject,:institution,:current_organization,:current_designation,:skills,:current_state,:native_state)
   end
 
   def default_collection_name

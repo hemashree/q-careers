@@ -20,19 +20,36 @@
         <%= theme_form_field(@my_referral, :name) %>
         <%= theme_form_field(@my_referral, :email) %>
         <div class = "margin_radio">
-          <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true%>&nbsp;&nbsp;&nbsp;
-          <strong>Experianced: </strong><%=f.radio_button :candidate_type,false%>
+          <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true, :id=>"fresher_id" %>&nbsp;&nbsp;&nbsp;
+          <strong>Experianced: </strong><%=f.radio_button :candidate_type,false,:id=>"experiance_id" %>
         </div>
+
+          <hr>
+          <div class="fresher_div">
+            <%= theme_form_field(@my_referral, :course) %>
+            <%= theme_form_field(@my_referral, :subject) %>
+            <%= theme_form_field(@my_referral, :institution) %>
+
+            <%= f.fields_for :my_referral do |c| %>
+              <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
+              <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
+            <% end %>
+          </div>
+
+          <div class="experiance_div">
+           <%= theme_form_field(@my_referral, :current_organization) %>
+           <%= theme_form_field(@my_referral, :current_designation) %>
+          </div>
+
         <br>
         <%= theme_form_field(@my_referral, :phone, html_options: {placeholder: '333-333-4444'}) %>
         <%= theme_form_field(@my_referral, :current_city) %>
         <%= theme_form_field(@my_referral, :native_city) %>
+        <%= theme_form_field(@my_referral, :current_state) %>
+        <%= theme_form_field(@my_referral, :native_state) %>
+        <%= theme_form_field(@my_referral, :skills) %>
        
 
-        <%= f.fields_for :my_referral do |c| %>
-        <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
-          <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
-        <% end %>
 
         <%= theme_form_field(@my_referral, :resume, :required => (@my_referral.new_record? ? true : false), html_options: {type: 'file'}) %>
       </div>
@@ -48,3 +65,21 @@
   </div>
 <% end %>
 
+
+
+<script>
+$(document).ready(function(){
+      $(".experiance_div").hide();
+
+    $("#experiance_id").click(function(){
+      $(".fresher_div").hide();
+      $(".experiance_div").show();
+    });
+
+    $("#fresher_id").click(function(){
+      $(".experiance_div").hide();
+      $(".fresher_div").show();
+
+    });
+});
+</script>
