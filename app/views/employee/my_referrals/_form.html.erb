@@ -19,6 +19,11 @@
       <div class="form-inputs mb-30 mt-30">
         <%= theme_form_field(@my_referral, :name) %>
         <%= theme_form_field(@my_referral, :email) %>
+        <div class = "margin_radio">
+          <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true%>&nbsp;&nbsp;&nbsp;
+          <strong>Experianced: </strong><%=f.radio_button :candidate_type,false%>
+        </div>
+        <br>
         <%= theme_form_field(@my_referral, :phone, html_options: {placeholder: '333-333-4444'}) %>
         <%= theme_form_field(@my_referral, :current_city) %>
         <%= theme_form_field(@my_referral, :native_city) %>

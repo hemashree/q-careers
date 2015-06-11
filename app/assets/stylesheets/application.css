@@ -14,6 +14,7 @@
  *= require poodle/poodle-theme
  *= require poodle/cropper
  *= require handycss.css
+ *= require style.css
  *= require_self
 
  */
