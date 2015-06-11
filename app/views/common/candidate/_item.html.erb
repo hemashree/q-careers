@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-sm-4" style="padding-right: 0px">
       <div style="background-color:grey;color:white;font-size:20px;padding:5px;">
-        <%= career_interest.application_id %>
+        <%#= career_interest.application_id %>
       </div>
 
       <%= clear_tag(5) %>
@@ -45,6 +45,7 @@
     </div>
 
     <div class="col-sm-8" style="padding-right: 0px">
+      <% binding.pry %>
       <%= theme_item_title(candidate.name, item_link) %>
       <%= theme_item_sub_title(candidate.email) %>
       <%= theme_item_sub_title(candidate.phone) %>

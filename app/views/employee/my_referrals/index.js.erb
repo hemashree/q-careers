@@ -1,4 +1,4 @@
-<% if @my_referrals.any? %>
+<% if @referrals.any? %>
 	// Fill the right box with first referral details in the list
 	$('#div_referral_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
 

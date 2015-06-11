@@ -1,46 +1,56 @@
 class Employee::MyReferralsController < Poodle::AdminController
 
-  skip_before_filter :require_admin
-
   def new
-    @my_referral = Candidate.new
+    @candidate = Candidate.new
     super
   end
 
   def create
-    @my_referral = Candidate.new(permitted_params)
+    @candidate = Candidate.new(permitted_params)
+    @candidate.year_of_passing = params[:candidate][:my_referral][:year_of_passing]
 
-    if @my_referral.save
+    @referral = CareerInterest.new(candidate: @candidate, referrer: current_user)
+    if @candidate.save && @referral.save
       flash[:success] = "Successfully saved the data."
+      begin
+        RegistrationsMailer.employee_referral(@referral).deliver_now
+      rescue
+      end
       redirect_to employee_my_referrals_path
     else
-      error = "#{@my_referral.errors.full_messages}. #{@referral.errors.full_messages}"
+      error = "#{@candidate.errors.full_messages}. #{@referral.errors.full_messages}"
       flash[:error] = "The email/phone is already registered with us. Error Details! #{error}"
       redirect_to employee_my_referrals_path
     end
   end
 
   def edit
-    @my_referral = Candidate.find_by_id(params[:id])
+    @referral = CareerInterest.find_by_id(params[:id])
+    @candidate = @referral.candidate
   end
 
   def update
-    @my_referral = Candidate.find_by_id(params[:id])
-    @my_referral.assign_attributes(permitted_params)
+    @referral = CareerInterest.find_by_id(params[:referral_id])
+    @candidate = @referral.candidate
+    @referral.referrer = current_user
+    @candidate.assign_attributes(permitted_params)
 
-    if @my_referral.save && @referral.save
-      redirect_to root_path
+    # FIXME - Params are passed now some odd way.
+    @candidate.year_of_passing = params[:candidate][:my_referral][:year_of_passing]
+
+    if @candidate.save && @referral.save
+      redirect_to employee_my_referrals_path
     else
-      redirect_to root_path
+      redirect_to employee_my_referrals_path
     end
   end
 
   def download
-    @my_referral = Candidate.find_by_id(params[:id])
+    @referral = CareerInterest.find_by_id(params[:id])
     if ["production", "staging"].include?(Rails.env)
-      redirect_to @my_referral.candidate.resume.url
+      redirect_to @referral.candidate.resume.url
     else
-      send_file @my_referral.candidate.resume.path, :x_sendfile => true
+      send_file @referral.candidate.resume.path, :x_sendfile => true
     end
   end
 
@@ -51,15 +61,15 @@ class Employee::MyReferralsController < Poodle::AdminController
   end
 
   def default_collection_name
-    "my_referrals"
+    "referrals"
   end
 
   def default_item_name
-    "my_referral"
+    "referral"
   end
 
   def default_class
-    Candidate
+    CareerInterest
   end
 
   def set_navs

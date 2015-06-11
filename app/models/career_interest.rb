@@ -7,7 +7,6 @@ class CareerInterest < ActiveRecord::Base
 
   # Validations
   validates :candidate, presence: true
-  validates :event, presence: true
 
   # Callbacks
   before_save :check_source_and_referrer

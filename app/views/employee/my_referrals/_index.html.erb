@@ -1,10 +1,10 @@
 <%# Displays list of @referrals %>
-<% @my_referrals.each do |my_referral| %>
-  <% item_link = employee_my_referral_path(my_referral) %>
-  <div id="div_referral_<%= my_referral.id %>">
-    <%= render :partial=>"item", :locals=>{:candidate=>my_referral, career_interest: my_referral, item_link: item_link} %>
+<% @referrals.each do |referral| %>
+  <% item_link = employee_my_referral_path(referral.candidate) %>
+  <div id="div_referral_<%= referral.id %>">
+    <%= render :partial=>"common/candidate/item", :locals=>{:candidate=>referral.candidate, career_interest: referral, item_link: item_link} %>
   </div>
 <% end %>
-<%= theme_panel_message(I18n.translate("forms.no_results")) if @my_referrals.blank? %>
+<%= theme_panel_message(I18n.translate("forms.no_results")) if @referrals.blank? %>
 
-<%= theme_paginate(@my_referrals) %>
+<%= theme_paginate(@referrals) %>

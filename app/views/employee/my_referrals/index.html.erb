@@ -12,7 +12,7 @@
 <%# Renders a partial to display all the events %>
 <div class="row">
 	<div id="div_referral_index" class="col-sm-6 hidden-xs">
-		<%= render :partial=>"index" %>
+		<%= render :partial=>"index", locals: {career_interest: @referral} %>
 	</div>
 
 	<div id="div_referral_drop_down" class="col-xs-12 visible-xs">
@@ -20,9 +20,8 @@
 	</div>
 
 	<div id="div_referral_details" class="col-xs-12 col-sm-6">
-		<%= theme_detail_box(@my_referrals) %>
+		<%= theme_detail_box(@referrals) %>
 	</div>
 
 </div>
-
 

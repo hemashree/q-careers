@@ -1,10 +1,10 @@
-<% method = @my_referral.new_record? ? :post : :put %>
-<% path = @my_referral.new_record? ? main_app.employee_my_referrals_path : main_app.new_employee_my_referral_path(@my_referral) %>
+<% method = @candidate.new_record? ? :post : :put %>
+<% path = @candidate.new_record? ? main_app.employee_my_referrals_path : main_app.new_employee_my_referral_path(@candidate) %>
 
-<%= form_for(@my_referral, url: path, :html => {:id=>"form_referral", :class=>"mb-0 form-horizontal", :role => "form", :method => method, multipart: true}) do |f| %>
+<%= form_for(@candidate, url: path, :html => {:id=>"form_referral", :class=>"mb-0 form-horizontal", :role => "form", :method => method, multipart: true}) do |f| %>
 
   <%#= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-  <%#= hidden_field_tag :referral_id, @referral.id if @referral.id -%>
+  <%= hidden_field_tag :referral_id, @referral.id if @referral.id -%>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -13,23 +13,23 @@
     <div class="panel-body" style="height:auto;">
 
       <div id="referral_form_error">
-        <%= @my_referral.errors[:base].to_sentence %>
+        <%= @candidate.errors[:base].to_sentence %>
       </div>
 
       <div class="form-inputs mb-30 mt-30">
-        <%= theme_form_field(@my_referral, :name) %>
-        <%= theme_form_field(@my_referral, :email) %>
-        <%= theme_form_field(@my_referral, :phone, html_options: {placeholder: '333-333-4444'}) %>
-        <%= theme_form_field(@my_referral, :current_city) %>
-        <%= theme_form_field(@my_referral, :native_city) %>
+        <%= theme_form_field(@candidate, :name) %>
+        <%= theme_form_field(@candidate, :email) %>
+        <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
+        <%= theme_form_field(@candidate, :current_city) %>
+        <%= theme_form_field(@candidate, :native_city) %>
        
 
         <%= f.fields_for :my_referral do |c| %>
         <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
-          <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
+          <%= theme_form_select_group(c, @candidate, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
         <% end %>
 
-        <%= theme_form_field(@my_referral, :resume, :required => (@my_referral.new_record? ? true : false), html_options: {type: 'file'}) %>
+        <%= theme_form_field(@candidate, :resume, :required => (@candidate.new_record? ? true : false), html_options: {type: 'file'}) %>
       </div>
 
     </div>
@@ -37,7 +37,7 @@
     <div class="panel-footer clearfix">
       <div class="pull-right">
         <%= link_to "Cancel", path, class: "btn btn-default", remote: true %>
-        <%= theme_form_button(@my_referral, "Submit the Form") %>
+        <%= theme_form_button(@candidate, "Submit the Form") %>
       </div>
     </div>
   </div>
