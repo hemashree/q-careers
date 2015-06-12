@@ -17,8 +17,8 @@
       </div>
 
       <div class="form-inputs mb-30 mt-30">
-        <%= theme_form_field(@my_referral, :name) %>
-        <%= theme_form_field(@my_referral, :email) %>
+        <%= theme_form_field(@candidate, :name) %>
+        <%= theme_form_field(@candidate, :email) %>
         <div class = "margin_radio">
           <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true, :id=>"fresher_id" %>&nbsp;&nbsp;&nbsp;
           <strong>Experianced: </strong><%=f.radio_button :candidate_type,false,:id=>"experiance_id" %>
@@ -26,28 +26,28 @@
 
           <hr>
           <div class="fresher_div">
-            <%= theme_form_field(@my_referral, :course) %>
-            <%= theme_form_field(@my_referral, :subject) %>
-            <%= theme_form_field(@my_referral, :institution) %>
+            <%= theme_form_field(@candidate, :course) %>
+            <%= theme_form_field(@candidate, :subject) %>
+            <%= theme_form_field(@candidate, :institution) %>
 
             <%= f.fields_for :my_referral do |c| %>
               <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
-              <%= theme_form_select_group(c, @my_referral, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
+              <%= theme_form_select_group(c, @candidate, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
             <% end %>
           </div>
 
           <div class="experiance_div">
-           <%= theme_form_field(@my_referral, :current_organization) %>
-           <%= theme_form_field(@my_referral, :current_designation) %>
+           <%= theme_form_field(@candidate, :current_organization) %>
+           <%= theme_form_field(@candidate, :current_designation) %>
           </div>
 
         <br>
-        <%= theme_form_field(@my_referral, :phone, html_options: {placeholder: '333-333-4444'}) %>
-        <%= theme_form_field(@my_referral, :current_city) %>
-        <%= theme_form_field(@my_referral, :native_city) %>
-        <%= theme_form_field(@my_referral, :current_state) %>
-        <%= theme_form_field(@my_referral, :native_state) %>
-        <%= theme_form_field(@my_referral, :skills) %>
+        <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
+        <%= theme_form_field(@candidate, :current_city) %>
+        <%= theme_form_field(@candidate, :native_city) %>
+        <%= theme_form_field(@candidate, :current_state) %>
+        <%= theme_form_field(@candidate, :native_state) %>
+        <%= theme_form_field(@candidate, :skills) %>
         <%= theme_form_field(@candidate, :resume, :required => (@candidate.new_record? ? true : false), html_options: {type: 'file'}) %>
       </div>
 
