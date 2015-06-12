@@ -1,5 +1,7 @@
 class Employee::MyReferralsController < Poodle::AdminController
 
+  skip_before_filter :require_admin
+  
   def new
     @candidate = Candidate.new
     super
