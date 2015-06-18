@@ -1,4 +1,4 @@
-function validateReferralForm() {
+// function validateReferralForm() {
 
     jQuery.validator.addMethod("phone_format", function(value, element) {
       return /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/.test( value );
@@ -12,15 +12,48 @@ function validateReferralForm() {
             minlength: 3,
             maxlength: 255
         },
-        "candidate[email]": "required",
+        "candidate[email]": {
+            required: true,
+            email: true
+         },
         "candidate[phone]": {
             required: true,
             minlength: 12,
             maxlength: 12,
             phone_format: true
         },
+
+        "candidate[current_organization]":{
+          required: true
+        },
+
+        "candidate[current_designation]":{
+          required: true
+        }, 
+        
+        "candidate[course]":{
+          required: true
+        }, 
+
+        "candidate[subject]":{
+          required: true
+        }, 
+
+        "candidate[institution]":{
+          required: true
+        },
+
+        "candidate[my_referral][year_of_passing]":{
+          required: true
+        },
+
+
+        "candidate[communication_addr]": "required",
+        "candidate[skills]": "required",
         "candidate[current_city]": "required",
         "candidate[native_city]": "required",
+        "candidate[current_state]": "required",
+        "candidate[native_state]": "required",
         "candidate[candidate][referral[year_of_passing]]": "required",
         "candidate[resume]": {
           "required": {
@@ -39,7 +72,9 @@ function validateReferralForm() {
       errorClass: "help-block",
       messages: {
         "candidate[name]": "This field is required.",
-        "candidate[email]": "This field is required.",
+        "candidate[email]": {
+          required: "This field is required."
+        },
         "candidate[phone]": {
           required: "This field is required.",
           minlength: "12 characters required including '-' (333-333-4444)",
@@ -90,4 +125,4 @@ function validateReferralForm() {
 
     });
 
-}
+// }

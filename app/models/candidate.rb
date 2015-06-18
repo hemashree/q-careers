@@ -16,6 +16,12 @@ class Candidate < ActiveRecord::Base
 
   validate_string :current_city, mandatory: true, max_length: 128, format: /.*/i
   validate_string :native_city, mandatory: true, max_length: 128, format: /.*/i
+  validate_string :current_organization, mandatory: true if :candidate_type_validate == false
+  validate_string :current_designation, mandatory: true if :candidate_type_validate == false
+  validate_string :course, mandatory: true if :candidate_type_validate == true
+  validate_string :subject, mandatory: true if :candidate_type_validate == true 
+  validate_string :institution, mandatory: true if :candidate_type_validate == true
+
   # validate_string :year_of_passing, inclusion: %w("2009" "2010" "2011" "2012" "2013" "2014" "2015")
   # validates :resume, presence: true
 
@@ -37,6 +43,11 @@ class Candidate < ActiveRecord::Base
   #   >>> candidate = Candidate.new(name: "Anjan Gowda")
   #   >>> candidate.namify
   #   => "AG"
+
+  def candidate_type_validate
+    return self.candidate_type
+  end
+
   def namify
     self.name.split(" ").map{|x| x.first.capitalize}[0..1].join("")
   end
