@@ -2,10 +2,10 @@
 
 <div class="row mb-10">
 	<div class="col-sm-6">
-		<%= theme_button('New Referral', 'plus', main_app.new_employee_my_referral_path) %>
+		<%= theme_button('New Referral', 'plus', main_app.new_employee_my_referral_path, {remote: false}) %>
 	</div>
 	<div class="col-sm-6">
-		<%#= theme_search_form(CareerInterest, main_app.new_employee_my_referral_path, :get, true, "Search!", "Search Referrals") %>
+		<%= theme_search_form(CareerInterest, main_app.employee_my_referrals_path, :get, true, "Search!", "Search Referrals") %>
   </div>
 </div>
 

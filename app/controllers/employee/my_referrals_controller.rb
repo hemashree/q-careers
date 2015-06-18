@@ -4,7 +4,7 @@ class Employee::MyReferralsController < Poodle::AdminController
   
   def new
     @candidate = Candidate.new
-    super
+    # super
   end
 
   def create

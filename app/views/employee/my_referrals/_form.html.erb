@@ -4,7 +4,7 @@
 <%= form_for(@candidate, url: path, :html => {:id=>"form_referral", :class=>"mb-0 form-horizontal", :role => "form", :method => method, multipart: true}) do |f| %>
 
   <%#= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-  <%= hidden_field_tag :referral_id, @referral.id if @referral.id -%>
+  <%#= hidden_field_tag :referral_id, @referral.id if @referral.id -%>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -17,52 +17,116 @@
       </div>
 
       <div class="form-inputs mb-30 mt-30">
-        <%= theme_form_field(@candidate, :name) %>
-        <%= theme_form_field(@candidate, :email) %>
-        <div class = "margin_radio">
-          <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true, :id=>"fresher_id" %>&nbsp;&nbsp;&nbsp;
-          <strong>Experianced: </strong><%=f.radio_button :candidate_type,false,:id=>"experiance_id" %>
+        <div class ="row">
+            <div class="col-xs-6">
+              <%= theme_form_field(@candidate, :name) %>
+            </div>
+
+            <div class="col-xs-6">
+              <%= theme_form_field(@candidate, :email) %>
+            </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class = "margin_radio">
+              <div class="col-xs-2">
+                <strong>Fresher: </strong><%=f.radio_button :candidate_type, true, :checked => true, :id=>"fresher_id" %>&nbsp;&nbsp;&nbsp;
+              </div>
+              <div class="col-xs-2">
+                <strong>Experienced: </strong><%=f.radio_button :candidate_type,false,:id=>"experiance_id" %>
+              </div>
+            </div>
+          </div>
         </div>
 
-          <hr>
-          <div class="fresher_div">
-            <%= theme_form_field(@candidate, :course) %>
-            <%= theme_form_field(@candidate, :subject) %>
-            <%= theme_form_field(@candidate, :institution) %>
 
-            <%= f.fields_for :my_referral do |c| %>
-              <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
-              <%= theme_form_select_group(c, @candidate, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
-            <% end %>
+          <div class="fresher_div">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= theme_form_field(@candidate, :course) %>
+              </div>
+
+              <div class="col-xs-6">
+                <%= theme_form_field(@candidate, :subject) %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <%= theme_form_field(@candidate, :institution) %>
+              </div>
+              <div class="col-xs-6">
+                <%= f.fields_for :my_referral do |c| %>
+                <% options_list = Array[*Fresher::YEAR_OF_PASSING_LIST.collect {|v,i| [v,v] }].sort %>
+                <%= theme_form_select_group(c, @candidate, :year_of_passing, options_list, label: "Year of Passing *", param_name: "year_of_passing", prompt: true) %>
+                <% end %>
+              </div>
+            </div>
           </div>
 
           <div class="experiance_div">
-           <%= theme_form_field(@candidate, :current_organization) %>
-           <%= theme_form_field(@candidate, :current_designation) %>
-          </div>
+            <div class="row">
+              <div class="col-xs-6">
+               <%= theme_form_field(@candidate, :current_organization) %>
+             </div>
+             <div class="col-xs-6">
+               <%= theme_form_field(@candidate, :current_designation) %>
+             </div>
+           </div>
+         </div>
 
-        <br>
-        <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
-        <%= theme_form_field(@candidate, :current_city) %>
-        <%= theme_form_field(@candidate, :native_city) %>
-        <%= theme_form_field(@candidate, :current_state) %>
-        <%= theme_form_field(@candidate, :native_state) %>
-        <%= theme_form_field(@candidate, :skills) %>
-        <%= theme_form_field(@candidate, :resume, :required => (@candidate.new_record? ? true : false), html_options: {type: 'file'}) %>
+         <div class="row">
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :native_city) %>
+          </div>
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :native_state) %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :current_city) %>
+          </div>
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :current_state) %>
+          </div>
+        </div>
+       
+        
+
+        <div class="row">
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :communication_addr) %>
+          </div>
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :skills) %>
+          </div>
+        </div>
+
+         <div class="row" style="">
+          <div class="col-xs-6">
+            <%= theme_form_field(@candidate, :phone, html_options: {placeholder: '333-333-4444'}) %>
+          </div>
+          <div class="col-xs-6">
+          <%= theme_form_field(@candidate, :resume, :required => (@candidate.new_record? ? true : false), html_options: {type: 'file'}) %>
+        </div>
+        </div>
+
       </div>
 
     </div>
 
     <div class="panel-footer clearfix">
       <div class="pull-right">
-        <%= link_to "Cancel", path, class: "btn btn-default", remote: true %>
+        <%= link_to "Cancel", path, class: "btn btn-default" %>
         <%= theme_form_button(@candidate, "Submit the Form") %>
       </div>
     </div>
   </div>
 <% end %>
 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
 $(document).ready(function(){
