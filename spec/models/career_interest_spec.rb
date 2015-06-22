@@ -1,32 +1,45 @@
 require 'rails_helper'
 RSpec.describe CareerInterest, type: :model do
 
-  let(:career_interest) {FactoryGirl.create(:career_interest)}
-  let(:candidate1) {FactoryGirl.create(:candidate, name: "Test user", email: "email1@domain.com", phone: "952-365-1245")}
-  let(:candidate2) {FactoryGirl.create(:candidate, name: "Krishna Prasad", email: "email2@domain.com", phone: "952-365-1246")}
-  let(:candidate3) {FactoryGirl.create(:candidate, name: "Anjankumar", email: "email3@domain.com", phone: "952-365-1247", current_city: "Mysore", native_city: "Mandya")}
-  let(:event1) {FactoryGirl.create(:event, :name => "Event1", :venue => "Qwinix Mysore", :slug => "sjc")}
-  let(:event2) {FactoryGirl.create(:event, :name => "Event2", :description => "Drive 2015", :slug => "vvc")}
-  let(:event3) {FactoryGirl.create(:event, :name => "Event3", :slug => "vvk")}
-  let(:career_interest1) {FactoryGirl.create(:career_interest, candidate_id: candidate1.id, event_id: event1.id )}
-  let(:career_interest2) {FactoryGirl.create(:career_interest, candidate_id: candidate2.id, event_id: event2.id )}
-  let(:career_interest3) {FactoryGirl.create(:career_interest, candidate_id: candidate3.id, event_id: event3.id, reported: true)}
-  let(:user) {FactoryGirl.create(:user)}
+  # let(:career_interest) {FactoryGirl.create(:career_interest)}
+  # let(:candidate1) {FactoryGirl.create(:candidate, name: "Test user", email: "email1@domain.com", phone: "952-365-1245")}
+  # let(:candidate2) {FactoryGirl.create(:candidate, name: "Krishna Prasad", email: "email2@domain.com", phone: "952-365-1246")}
+  # let(:candidate3) {FactoryGirl.create(:candidate, name: "Anjankumar", email: "email3@domain.com", phone: "952-365-1247", current_city: "Mysore", native_city: "Mandya")}
+  # let(:event1) {FactoryGirl.create(:event, :name => "Event1", :venue => "Qwinix Mysore", :slug => "sjc")}
+  # let(:event2) {FactoryGirl.create(:event, :name => "Event2", :description => "Drive 2015", :slug => "vvc")}
+  # let(:event3) {FactoryGirl.create(:event, :name => "Event3", :slug => "vvk")}
+  # let(:career_interest1) {FactoryGirl.create(:career_interest, candidate_id: candidate1.id, event_id: event1.id )}
+  # let(:career_interest2) {FactoryGirl.create(:career_interest, candidate_id: candidate2.id, event_id: event2.id )}
+  # let(:career_interest3) {FactoryGirl.create(:career_interest, candidate_id: candidate3.id, event_id: event3.id, reported: true)}
+  # let(:user) {FactoryGirl.create(:user)}
 
   context "Factory" do
     it "should validate all the career_interest factories" do
-      expect(FactoryGirl.create(:career_interest).valid?).to be true
+      expect(FactoryGirl.build(:employee_open_referral).valid?).to be true
+      expect(FactoryGirl.build(:employee_event_referral).valid?).to be true
+      expect(FactoryGirl.build(:employee_job_referral).valid?).to be true
+      expect(FactoryGirl.build(:online_job_application).valid?).to be true
+      expect(FactoryGirl.build(:online_event_application).valid?).to be true
+      expect(FactoryGirl.build(:registration_desk_entry).valid?).to be true
+      expect(FactoryGirl.build(:sourced_from_job_portal_against_job).valid?).to be true
+      expect(FactoryGirl.build(:sourced_from_job_portal).valid?).to be true
     end
   end
 
   context "Associations" do
-    it { should belong_to(:candidate) }
-    it { should belong_to(:event) }
+    it { 
+        should belong_to(:candidate)
+        should belong_to(:event)
+        should belong_to(:job)
+        should belong_to(:referrer)
+      }
   end
 
   context "Validations" do
-    it { should validate_presence_of :candidate }
-    it { should validate_presence_of :event }
+    it { 
+      should validate_presence_of :candidate
+      should validate_presence_of :source
+    }
   end
 
   context "Class Methods" do

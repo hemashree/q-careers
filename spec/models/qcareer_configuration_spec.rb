@@ -1,34 +1,27 @@
 require 'rails_helper'
 RSpec.describe QcareerConfiguration, type: :model do
-
-describe "validate fields" do
-  
-  before :each do
-    @career_configuration = QcareerConfiguration.new(
-            :value => 'Value',
-            :description => 'Desc',
-            :name => 'Dashboard'
-        )
+  context "Validations" do
+    it { 
+      should validate_presence_of :name
+      should allow_value('HOMEPAGE').for(:name)
+      # Should automatically upcase name before validation
+      #should allow_value('homepage').for(:name)
+      should allow_value('HOMEPAGE_EVENT').for(:name)
+      should_not allow_value('HOMEPAGE EVENT').for(:name)
+      should_not allow_value('XXXXXXX').for(:name)
+      should_not allow_value("X"*33).for(:name)
+    }
+    it {
+      should validate_presence_of :value
+      should allow_value('HOMEPAGE_EVENT').for(:value)
+      should_not allow_value('XX').for(:value)
+      should_not allow_value("X"*257).for(:value)
+    }
+    it {
+      should validate_presence_of :description
+      should allow_value('Lorem Ipsum Comment').for(:description)
+      should_not allow_value('XX').for(:description)
+      should_not allow_value("X"*1025).for(:description)
+    }
   end
-  
-  it "should validate the career configuation fields" do
-    expect(@career_configuration).to be_valid
-  end
-
-  it "should not validate the career configuation fields if any of the field is nill " do
-    @career_configuration.value = nil
-    expect(@career_configuration).not_to be_valid
-    
-    @career_configuration.description = nil
-    expect(@career_configuration).not_to be_valid
-  end
-
-  it "should not validate if the name is nill" do
-    @career_configuration.name = nil
-    expect(@career_configuration).not_to be_valid
-  end
-end
-
-
-
 end

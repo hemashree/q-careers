@@ -3,7 +3,7 @@ require 'spec_helper'
 
 feature 'Create candidates' do
 
-  scenario 'should be ablr to see the form to enter the details' do
+  scenario 'As an employee of the organisation, I should be able to refer my friend or a known person to me' do
     visit '/employee/my_referrals'
     expect(page).to have_content('My Referrals')
     expect(page).to have_link('New Referral')

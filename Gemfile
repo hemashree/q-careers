@@ -33,9 +33,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "codeclimate-test-reporter", group: :test, require: nil
 
 gem 'q_auth_ruby_client', '~> 0.1.1'
-#gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
-gem 'poodle-rb', '~> 0.2.3'
-#gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
+#gem 'q_auth_ruby_client', path: "/Users/Krishnan/Projects/Github/QwinixLabs/q_auth_ruby_client"
+gem 'poodle-rb', '~> 0.2.5'
+#gem 'poodle-rb', path: "/Users/Krishnan/Projects/Github/QwinixLabs/poodle"
 
 # Poodle Dependencies
 gem "handy-css-rails", "0.0.7"
