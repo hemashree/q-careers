@@ -3,19 +3,23 @@ class CareerInterest < ActiveRecord::Base
   # Associations
   belongs_to :candidate
   belongs_to :event
+  belongs_to :job
   belongs_to :referrer, class_name: "QAuthRubyClient::User"
 
   # Validations
   validates :candidate, presence: true
-  validates :event, presence: true
+  validates :source, presence: true
+  
+  # Source can be the following
+  # registration_desk
+  # employee_referral
+  # online_application
+  # sourced_from_job_portal
 
   # Callbacks
   before_save :check_source_and_referrer
 
-  # Source can be the following
-  # registration_desk
-  # candidate
-  # employee_referral
+  
 
   # Class Methods
 

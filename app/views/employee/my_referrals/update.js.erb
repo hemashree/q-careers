@@ -1,0 +1,19 @@
+<% if @referral.errors.blank? %>
+	// Fill the right box with first item details
+  $('#div_referral_details').html("<%= escape_javascript(render(:partial=>"show")) %>");
+
+  // Refresh the updated item in the list
+  $("#div_referral_<%= @referral.id %>").html("<%= escape_javascript(render :partial => 'item', :locals => { :referral => @referral }) %>")
+  $(".panel-message").hide();
+<% else %>
+  $('#div_referral_details').html("<%= escape_javascript(render(:partial=>'form')) %>");
+  validateEventForm();
+  addDatePicker("#form_referral input.datepicker");
+
+  // Populate Server Side Errors
+  <%
+    text = "You have few errors. They have been highlighted."
+    error_message = content_tag(:div, text, class: "alert alert-danger")
+  %>
+  $("#referral_form_error").html("<%= escape_javascript(error_message) %>");
+<% end %>

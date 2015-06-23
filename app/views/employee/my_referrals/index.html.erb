@@ -1,0 +1,27 @@
+<%= theme_heading("My Referrals") %>
+
+<div class="row mb-10">
+	<div class="col-sm-6">
+		<%= theme_button('New Referral', 'plus', main_app.new_employee_my_referral_path) %>
+	</div>
+	<div class="col-sm-6">
+		<%#= theme_search_form(CareerInterest, main_app.new_employee_my_referral_path, :get, true, "Search!", "Search Referrals") %>
+  </div>
+</div>
+
+<%# Renders a partial to display all the events %>
+<div class="row">
+	<div id="div_referral_index" class="col-sm-6 hidden-xs">
+		<%= render :partial=>"index", locals: {career_interest: @referral} %>
+	</div>
+
+	<div id="div_referral_drop_down" class="col-xs-12 visible-xs">
+		<%#= theme_drop_down(@referrals, :name, scope: :employee) %>
+	</div>
+
+	<div id="div_referral_details" class="col-xs-12 col-sm-6">
+		<%= theme_detail_box(@referrals) %>
+	</div>
+
+</div>
+

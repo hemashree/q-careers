@@ -19,7 +19,7 @@ FactoryGirl.define do
 		user_type "super_admin"
 		q_auth_uid "1"
 		q_careers_role "q_careers_admin"
-		auth_token "132s6ds6a52sc652a"
+		auth_token {SecureRandom.hex}
 		token_created_at Time.now
   end
 end

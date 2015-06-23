@@ -1,24 +1,21 @@
 class Candidate < ActiveRecord::Base
 
-  # Associations
-  has_many :career_interests
-  has_many :events, through: :career_interests
-
-  # Constants
-  COUNTRY_LIST = ["India", "United States", "United Arab Emirates", "Costa Rica"]
-
   # Validations
   extend PoodleValidators
 
   validate_string :name, mandatory: true
   validate_email :email, uniqueness: true
-  validate_string :phone, mandatory: true, min_length: 12, max_length: 12, format: /[0-9]{3}[-][0-9]{3}[-][0-9]{4}/, uniqueness: true
+  validate_phone :phone,  phone_format: :indian
 
   validate_string :current_city, mandatory: true, max_length: 128, format: /.*/i
+  validate_string :current_state, mandatory: true, max_length: 128, format: /.*/i
   validate_string :native_city, mandatory: true, max_length: 128, format: /.*/i
-  # validate_string :year_of_passing, inclusion: %w("2009" "2010" "2011" "2012" "2013" "2014" "2015")
-  # validates :resume, presence: true
+  validate_string :native_state, mandatory: true, max_length: 128, format: /.*/i
 
+  # Associations
+  has_many :career_interests
+  has_many :events, through: :career_interests
+  
   # File Uploader Method Hook
   mount_uploader :resume, ResumeUploader
 
@@ -41,16 +38,12 @@ class Candidate < ActiveRecord::Base
     self.name.split(" ").map{|x| x.first.capitalize}[0..1].join("")
   end
 
-  # * Return address which includes city, state & country
+  # * Return address which includes city & state
   # == Examples
   #   >>> candidate.display_address(type)
-  #   => "Mysore, Karnataka, India"
+  #   => "Mysore, Karnataka"
   def display_address(type)
     [self.send("#{type}_city"), self.send("#{type}_state")].compact.uniq.join(", ")
-    #address_list << send.("#{type}_city") unless send.("#{type}_city").blank?
-    #address_list << send.("#{type}_state") unless send.("#{type}_state").blank?
-    #address_list << send.("#{type}_country") unless send.("#{type}_country").blank?
-    #address_list.join(", ")
   end
 
   def display_current_address

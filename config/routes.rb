@@ -82,6 +82,11 @@ Rails.application.routes.draw do
   end
 
   namespace :employee do
+    resources :my_referrals do
+      member do
+        get 'download'
+      end
+    end
     resources :events, only: [:index, :show] do
       resources :referrals do
         member do

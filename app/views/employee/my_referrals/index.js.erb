@@ -1,0 +1,12 @@
+<% if @referrals.any? %>
+	// Fill the right box with first referral details in the list
+	$('#div_referral_details').html("<%= escape_javascript(render(:partial=>'show')) %>");
+
+	// Rendering the item list
+	$('#div_referral_index').html("<%= escape_javascript(render(:partial=>"index")) %>");
+	// $('#div_referral_drop_down').html("<%#= escape_javascript(theme_drop_down(@referrals, :name)) %>");
+<% else %>
+	var noResultsText = "<%= escape_javascript(theme_panel_message(I18n.translate('forms.no_results')))%>";
+	$('#div_referral_index').html(noResultsText);
+	$('#div_referral_details').html(noResultsText);
+<% end %>
