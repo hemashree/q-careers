@@ -50,6 +50,20 @@ RSpec.describe Event, type: :model do
     }
 
     it { should_not allow_value("x"*2057).for(:description) }
+  
+    it { 
+      should validate_presence_of :status
+      should allow_value('planning').for(:status)
+      should allow_value('scheduled').for(:status)
+      should allow_value('over').for(:status)
+      should_not allow_value('status').for(:status)
+    }
+    
+    it { 
+      should validate_presence_of :venue
+      should allow_value('Qwinix Technologies, Mysore').for(:venue)
+      should_not allow_value('Mysore$%?').for(:venue)
+    }
   end
 
   context "Class Methods" do

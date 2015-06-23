@@ -1,6 +1,7 @@
 FactoryGirl.define do
 	sequence(:slug){ |n| "event-#{n}"}
   
+
   factory :planning_event, class: Event do
   	name "Planning Event"
   	date {(Date.today + 3.month).to_s}
