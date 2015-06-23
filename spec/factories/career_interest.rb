@@ -34,7 +34,7 @@ FactoryGirl.define do
   factory :employee_event_referral, class: CareerInterest do
     association :candidate, :factory => :fresher_candidate
     association :referrer, :factory => :user
-    event
+    event "planning_event"
     source "employee_referral"
   end
 
@@ -56,7 +56,7 @@ FactoryGirl.define do
   # A Candidate apply online for an event
   factory :online_event_application, class: CareerInterest do
     association :candidate, :factory => :fresher_candidate
-    event
+    event "planning_event"
     source "online_application"
   end
 
@@ -64,7 +64,7 @@ FactoryGirl.define do
   # And Registration Desk creates an entry for him
   factory :registration_desk_entry, class: CareerInterest do
     association :candidate, :factory => :fresher_candidate
-    event
+    event "scheduled_event"
     source "registration_desk"
   end
 

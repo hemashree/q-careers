@@ -5,9 +5,9 @@ RSpec.describe CareerInterest, type: :model do
    let(:candidate1) {FactoryGirl.create(:fresher_candidate, name: "Test user", email: "email1@domain.com", phone: "9523651245")}
    let(:candidate2) {FactoryGirl.create(:experienced_candidate, name: "Krishna Prasad", email: "email2@domain.com", phone: "9523651246")}
    let(:candidate3) {FactoryGirl.create(:experienced_candidate, name: "Anjankumar", email: "email3@domain.com", phone: "9523651247", current_city: "Mysore", native_city: "Mandya")}
-   let(:event1) {FactoryGirl.create(:event, :name => "Event1", :venue => "Qwinix Mysore", :slug => "sjc")}
-   let(:event2) {FactoryGirl.create(:event, :name => "Event2", :description => "Drive 2015", :slug => "vvc")}
-   let(:event3) {FactoryGirl.create(:event, :name => "Event3", :slug => "vvk")}
+   let(:event1) {FactoryGirl.create(:planning_event, :name => "Event1", :venue => "Qwinix Mysore", :slug => "sjc")}
+   let(:event2) {FactoryGirl.create(:scheduled_event, :name => "Event2", :description => "Drive 2015", :slug => "vvc")}
+   let(:event3) {FactoryGirl.create(:past_event, :name => "Event3", :slug => "vvk")}
    let(:career_interest1) {FactoryGirl.create(:employee_open_referral, candidate_id: candidate1.id, event_id: event1.id )}
    let(:career_interest2) {FactoryGirl.create(:employee_job_referral, candidate_id: candidate2.id, event_id: event2.id )}
    let(:career_interest3) {FactoryGirl.create(:registration_desk_entry, candidate_id: candidate3.id, event_id: event3.id, reported: true)}
@@ -53,7 +53,7 @@ RSpec.describe CareerInterest, type: :model do
 
   context "Instance Methods" do
     it "should generate application code" do
-      event10 = FactoryGirl.create(:event, :id => 1, :name => "Event10", :venue => "Qwinix Mysore", :slug => "sjce")
+      event10 = FactoryGirl.create(:planning_event, :id => 1, :name => "Event10", :venue => "Qwinix Mysore", :slug => "sjce")
       candidate10 = FactoryGirl.create(:fresher_candidate, name: "Test user", email: "email1@domain.com", phone: "9523651245")
       career_interest10 = FactoryGirl.create(:employee_open_referral, :id => 1, :event_id => event10.id, :candidate_id => candidate10.id)
       expect(career_interest10.application_id).to eq("1-ER101")

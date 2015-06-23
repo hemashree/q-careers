@@ -68,7 +68,7 @@ RSpec.describe Event, type: :model do
 
   context "Class Methods" do
     it "search" do
-      arr = [event1, event2, event3]
+      arr = [apple, mango, orange]
       
       # Search Name
       expect(Event.search("Apple")).to match_array([apple])
@@ -87,18 +87,13 @@ RSpec.describe Event, type: :model do
 
       expect(Event.search("Fruit")).to match_array(arr)
 
-      # Search Slug
-      expect(Event.search("sebu")).to match_array([apple])
-      expect(Event.search("maavu")).to match_array([mango])
-      expect(Event.search("kithale")).to match_array([orange])
-
       # Negative Case
       expect(Event.search("Hello World")).to match_array([])
     end
 
     it "it shows upcoming events" do
       arr = [qwinix_careers, apple, mango, orange]
-      expect(Event.upcoming_events).to match_array([mango, orange])
+      expect(Event.upcoming_events).to match_array([apple,mango])
     end
   end
 
@@ -110,10 +105,10 @@ RSpec.describe Event, type: :model do
     end
 
     it "it should test the event is over or planning or it is scheduled" do
-      array = [event1, event2, event3]
-      expect(apple.planning?).to be_true
-      expect(mango.scheduled?).to be_true
-      expect(orange.over?).to be_true
+      array = [apple, mango, orange]
+      expect(apple.planning?).to eq(true)
+      expect(mango.scheduled?).to eq(true)
+      expect(orange.over?).to eq(true)
     end
   end
 end
