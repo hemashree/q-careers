@@ -7,7 +7,9 @@ RSpec.describe Event, type: :model do
 
   context "Factory" do
     it "should validate all the event factories" do
-      expect(FactoryGirl.build(:event).valid?).to be true
+      expect(FactoryGirl.build(:planning_event).valid?).to be true
+      expect(FactoryGirl.build(:scheduled_event).valid?).to be true
+      expect(FactoryGirl.build(:past_event).valid?).to be true
     end
   end
 
@@ -17,21 +19,36 @@ RSpec.describe Event, type: :model do
   end
 
   context "Validations" do
-    it { should validate_presence_of :name }
-    it { should allow_value('Recruitment Drive 2015').for(:name )}
-    it { should validate_presence_of :slug }
-    it { should allow_value('walk-in').for(:slug )}
-    it { should validate_presence_of :date }
-    it { should allow_value('2015-02-14').for(:date )}
-    it { should validate_presence_of :status }
-    it { should allow_value('planning').for(:status )}
-    it { should allow_value('scheduled').for(:status )}
-    it { should allow_value('over').for(:status )}
-    it { should_not allow_value('status').for(:status )}
-    it { should validate_presence_of :venue }
-    it { should allow_value('Qwinix Technologies, Mysore').for(:venue )}
-    it { should_not allow_value('Mysore$%?').for(:venue )}
-    it { should_not allow_value("x"*2057).for(:description )}
+    it { 
+      should validate_presence_of :name
+      should allow_value('Recruitment Drive 2015').for(:name)
+    }
+
+    it { 
+      should validate_presence_of :slug
+      should allow_value('walk-in').for(:slug)
+    }
+
+    it { 
+      should validate_presence_of :date
+      should allow_value('2015-02-14').for(:date)
+    }
+
+    it { 
+      should validate_presence_of :status
+      should allow_value('planning').for(:status)
+      should allow_value('scheduled').for(:status)
+      should allow_value('over').for(:status)
+      should_not allow_value('status').for(:status)
+    }
+    
+    it { 
+      should validate_presence_of :venue
+      should allow_value('Qwinix Technologies, Mysore').for(:venue)
+      should_not allow_value('Mysore$%?').for(:venue)
+    }
+
+    it { should_not allow_value("x"*2057).for(:description) }
   end
 
 
